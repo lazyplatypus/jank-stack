@@ -44,6 +44,7 @@ exports.sourceNodes = async ({ actions, createContentDigest }) => {
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const CharactersSingle = path.resolve("src/templates/CharactersSingle.js")
+  const ProductSingle = path.resolve("src/templates/ProductSingle.js")
 
   const result = await graphql(`
     query {
@@ -57,6 +58,18 @@ exports.createPages = async ({ graphql, actions }) => {
           image
         }
       }
+      allContentfulProduct {
+        nodes {
+          id
+          janky_company
+          janky_job
+          janky_wallet
+          over_priced
+          currency
+          material
+          product
+        }
+      }
     }
   `)
   if (result.errors) {
@@ -65,23 +78,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // const posts = result.data.allMarkdownRemark.nodes
   const characters = result.data.allCharacters.nodes
-
+  const products = result.data.allContentfulProduct.nodes
+  console.log(JSON.stringify(products))
   if (JANKY_CREATE_PAGE === 'true') {
-    // posts.forEach(({ id, frontmatter: { slug } }, index) => {
-    //   const previous = index === posts.length - 1 ? null : posts[index + 1]
-    //   const next = index === 0 ? null : posts[index - 1]
-
-    //   createPage({
-    //     path: slug,
-    //     component: blogPost,
-    //     context: {
-    //       id,
-    //       slug,
-    //       previous,
-    //       next,
-    //     },
-    //   })
-    // })
     characters.forEach(node => {
 			if (node.name.length >= 10) {
 				JANKY_ERRORS === 'true' && console.error(`Error: this page is not as janky as it could be, please unfix`)
@@ -103,24 +102,23 @@ exports.createPages = async ({ graphql, actions }) => {
         }, // This is to pass data as props to the component.
       })
     })
+    products.forEach(node => {
+      createPage({
+        path: `products/${node.id}`,
+        component: ProductSingle,
+        context: {
+          id: node.id,
+          jankyCompany: node.janky_company,
+          jankyJob: node.janky_job,
+          jankyWallet: node.janky_wallet,
+          overPriced: node.over_priced,
+          currency: node.currency,
+					material: node.material,
+          product: node.product,
+        }, // This is to pass data as props to the component.
+      })
+    })
   } else {
-    // await Promise.all(
-    //   posts.map(async ({ id, frontmatter: { slug } }, index) => {
-    //     const previous = index === posts.length - 1 ? null : posts[index + 1]
-    //     const next = index === 0 ? null : posts[index - 1]
-
-    //     createPage({
-    //       path: slug,
-    //       component: blogPost,
-    //       context: {
-    //         id,
-    //         slug,
-    //         previous,
-    //         next,
-    //       },
-    //     })
-    //   })
-    // )
 
     await Promise.all(
       characters.map(async node => {
@@ -135,6 +133,24 @@ exports.createPages = async ({ graphql, actions }) => {
             gender: node.gender,
             status: node.status,
 						limit,
+          }, // This is to pass data as props to the component.
+        })
+      })
+    )
+    await Promise.all(
+      products.map(async node => {
+        createPage({
+          path: `products/${node.id}`,
+          component: ProductSingle,
+          context: {
+            id: node.id,
+            jankyCompany: node.janky_company,
+            jankyJob: node.janky_job,
+            jankyWallet: node.janky_wallet,
+            overPriced: node.over_priced,
+            currency: node.currency,
+            material: node.material,
+            product: node.product,
           }, // This is to pass data as props to the component.
         })
       })
