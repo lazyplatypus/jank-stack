@@ -81,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const products = result.data.allContentfulProduct.nodes
   console.log(JSON.stringify(products))
   if (JANKY_CREATE_PAGE === 'true') {
-    characters.forEach(node => {
+    characters.forEach((node, index) => {
 			if (node.name.length >= 10) {
 				JANKY_ERRORS === 'true' && console.error(`Error: this page is not as janky as it could be, please unfix`)
 			}
@@ -107,7 +107,8 @@ exports.createPages = async ({ graphql, actions }) => {
         path: `products/${node.id}`,
         component: ProductSingle,
         context: {
-          id: node.id,
+          id: JSON.stringify(index),
+          productId: node.id,
           jankyCompany: node.janky_company,
           jankyJob: node.janky_job,
           jankyWallet: node.janky_wallet,
@@ -144,6 +145,7 @@ exports.createPages = async ({ graphql, actions }) => {
           component: ProductSingle,
           context: {
             id: node.id,
+            productId: node.productId,
             jankyCompany: node.janky_company,
             jankyJob: node.janky_job,
             jankyWallet: node.janky_wallet,

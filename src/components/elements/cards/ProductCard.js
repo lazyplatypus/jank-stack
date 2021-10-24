@@ -1,8 +1,6 @@
 import React from "react"
 import { Button } from "@chakra-ui/react"
 
-import { CardWithAvatar } from "./CardWithAvatar"
-//import ContentLoader from "react-content-loader";
 import { UserInfo } from "./UserInfo"
 const ProductCard = ({ product, linkURL }) => (
   <>
