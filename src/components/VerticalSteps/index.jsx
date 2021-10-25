@@ -114,7 +114,7 @@ const VerticalSteps = () => {
                 src="/steps/2.png"
                 alt="Github Signup"
                 />
-                <Text>For <b>NEW RELIC INGEST LICENSE KEY</b> head to <a href="https://one.newrelic.com">New Relic One</a>, click on the account dropdown menu on the top right, and select <b>API KEYS</b></Text>
+                <Text>For <b>NEW RELIC INGEST LICENSE KEY and Account ID</b> head to <a href="https://one.newrelic.com">New Relic One</a>, click on the account dropdown menu on the top right, and select <b>API KEYS</b></Text>
                 <Img
                 objectFit="cover"
                 w="full"
@@ -124,37 +124,8 @@ const VerticalSteps = () => {
                 src="/steps/5.png"
                 alt="Github Signup"
                 />
-                <Text>For <b>NEW RELIC INSIGHTS INSERT KEY and NEW RELIC ACCOUNT ID</b> click on the link on the right menu bar called <b>Insights Insert Keys</b></Text>
-                <Img
-                objectFit="cover"
-                w="full"
-                h="full"
-                htmlWidth="576px"
-                htmlHeight="420px"
-                src="/steps/6.png"
-                alt="Github Signup"
-                />
-                <Text>Click the blue add symbol next to Insert Key</Text>
-                <Img
-                objectFit="cover"
-                w="full"
-                h="full"
-                htmlWidth="576px"
-                htmlHeight="420px"
-                src="/steps/7.png"
-                alt="Github Signup"
-                />
-                <Text>You should be able to find the Account ID next to <b>Account: </b> and the Insert Key next to <b>Key: </b> </Text>
-                <Img
-                objectFit="cover"
-                w="full"
-                h="full"
-                htmlWidth="576px"
-                htmlHeight="420px"
-                src="/steps/8.png"
-                alt="Github Signup"
-                />
 
+                Copy and paste the account ID on the left, and click COPY KEY to get the `INGEST LICENSE KEY`. Make sure you are copying the INGEST LICENSE KEY.
 
               <HStack>
                 <Button size="sm" onClick={prevStep} variant="ghost">
