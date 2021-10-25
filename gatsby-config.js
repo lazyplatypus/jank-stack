@@ -33,7 +33,6 @@ module.exports = {
     {
       resolve: "gatsby-build-newrelic",
       options: {
-        NR_INSERT_KEY: process.env.NEW_RELIC_INSERT_KEY || '',
         NR_LICENSE_KEY: process.env.NEW_RELIC_LICENSE_KEY || '',
         NR_ACCOUNT_ID: process.env.NEW_RELIC_ACCOUNT_ID,
         SITE_NAME: 'jankstack',
